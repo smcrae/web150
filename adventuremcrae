@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Adventure McRae</title>
+</head>
+
+<body>
+
+<script>
+console.log("A boy named Thomas was a pretty smart kid for his ten years of age. His logical side of him however never understood one characteristic about himself... Thomas was petrified of all things scary. Thomas was horrified of movies , murder mysteries or thriller tales of any kind. He didn't know why or what had created this fear...but he knew he wanted to overcome it. He would hear a scary commercial and run in the other direction. ...he was just paralyzed by fear. Thomas was finally.done.being.afraid. The evening of his tenth birthday he saw an infommercial on television that kept repeating these magical words to him FACE YOUR FEARS. Thomas decided he was going to work towards not being afraid of scary things.And he was going to do it by FACING HIS FEARS. Hey ...what happened to that commercial...and what happened to the television....? Thomas welcome to The Twilight Zone I am Rod Serling");
+
+/*questions covering all required homework
+    It must use at least one boolean operator (&& or ||)
+    It must have at least one numerical comparison and one string comparison
+    It must use both if and switch
+    It must have at least two "nested" levels of decision-making*/
+
+var thomasDecision = prompt("You're walking up to... a) the staircase of a Haunted House b) to the edge of a dark eerie creek in a murky forest c) a dark theater to watch a horror movie? Type a, b, or c"); 
+
+if (thomasDecision == "a"||thomasDecision=="b")  //boolean comparison    //string comparison  //if statement       //top level nest
+{
+  var flashLight = prompt("Okay, do you want a flashlight ? This will prepare you for what is ahead.Type yes or no");
+	if (flashLight =="no")
+	{
+		console.log("You're not yet ready for this kind of terror yet");
+   }
+	else  //this is the option to 
+	 {
+		var numberStairs = prompt("Great bravery! How many stairs would you like to take to get you started?");  //number comparison    //lower level nest
+		if (numberStairs < 5)
+		{
+			console.log("It is good to be cautious and proceed slowly...you must not be afraid anymore Congrats!");
+		}
+		else if (numberStairs > 5)
+		{
+			console.log("You are going to shit yerself but all the power to you...you don't want to be afraid anymore Congrats!");
+		}
+		else if(numberStairs == 5 && thomasDecision == "b")
+		{
+			console.log("Watch your footing on the way down to the creek, you have no fear! Congrats");
+		}
+		else 
+		{
+			console.log("The steps you climbed led to your safe home! Congratulations you are not afraid"); 
+		}
+			
+	}
+} 
+else //this is where Thomas selects the movie option
+{ 
+	var movieType = prompt("What type of scary movie would you like to watch? Type thriller, gory or suspense?");		//switch statement
+	switch (movieType)
+	{
+		case "thriller": 
+			console.log("Okay, take a deep breath and prepare yourself for dark lighting, haunting music and sound effects");
+			break;
+		case "gory":
+		  	var ageAge = prompt("Wait, how old are you again, Thomas?");
+			if (ageAge < 17)
+			{ 
+				console.log("There are no movies for your age group; this is too violent for you...you are brave, but go home");
+				break;
+			}
+			else	//this is if Thomas is older than 17		
+			{  
+				console.log("others would face their fears with blood gutts and chainsaw sounds, but you're only 10yrs old, nice try");
+				break;
+			}
+				
+		case "suspense":
+			console.log("Okay, take a deep breath and prepare yourself for long hallways, solving murders and mayhem.");
+			break;
+		default: 
+			console.log("your input is invalid, you are clearly not facing your fears Thomas");
+			break; 
+			
+	}
+}
+</script>
+</body>
+</html>
+
+
