@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Business Intelligence</title>
+</head>
+<body>
+<script src="http://thomaswilburn.net/sccc/web150/assignment_data/sales.js"></script>
+<script>
+
+//array we are using :is sales
+
+var contribWidget = 0;
+for (var i = 0; i < sales.length; i++)
+{
+  contribWidget = contribWidget + sales[i];
+}
+console.log("The total dollar amount spent on the widget is: " + contribWidget);	//total money spent
+var average = contribWidget / sales.length;
+console.log("The average purchase price for the widgets was: " + average);     //average price paid
+
+
+var highest = -1.7976931348623157E+10308;
+var highestIndex= 0;
+for (var i = 0; i < sales.length; i++) 
+{
+	var bigPrice = sales[i];
+	if (highest < bigPrice) 
+	{	 highest = bigPrice;
+		 highestIndex = i;
+	}
+} 	
+console.log("The highest price paid for the the widget was: " + highestIndex);  //highest price paid
+
+var lowest = 0;
+var lowestIndex = 0;
+for (var i = 0; i < sales.length; i++)
+{
+	var smallPrice = sales[i];
+	if (lowest > smallPrice)				  
+		 lowest = smallPrice
+		 lowestIndex = i;
+}
+console.log("The lowest price paid for the widget was: " + lowest);    	 //lowest price paid
+
+console.log("The number of people who paid less than $10.00 per is: " + "lessthan");     //paid < than $10
+console.log("Our company                       : " + profit);      		 		// make or lose money
+              		
+</script>
+</body>
+</html>
+
