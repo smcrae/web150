@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Business Intelligence</title>
+</head>
+<body>
+<script src="http://thomaswilburn.net/sccc/web150/assignment_data/sales.js"></script>
+<script>
+
+//array we are using :is sales
+
+var unitsSold = sales.length;
+console.log("total transactions: " + unitsSold);
+//this was mental health check
+
+var reveNue = 0;
+for (var i = 0; i < sales.length; i++)
+{
+  reveNue = reveNue + sales[i];
+}
+console.log("The total dollar amount spent on the widget is: " + reveNue);	//total money spent
+var average = reveNue / unitsSold;
+console.log("The average purchase price for the widgets was: " + average);     //average price paid
+
+
+var highest = -1;
+for (var i = 0; i < sales.length; i++) 
+{
+	var bigPrice = sales[i];
+	if (highest < bigPrice) 
+	{	highest = bigPrice;
+	}
+} 	
+console.log("The highest price paid for the the widget was: " + highest);  //highest price paid
+
+
+var lowest = highest;
+for (var i = 0; i < sales.length; i++)
+{
+	var smallPrice = sales[i];
+	if (lowest > smallPrice)				  
+	{	 
+		lowest = smallPrice
+	}
+	
+}	
+console.log("The lowest price paid for the widget was: " + lowest);    	 //lowest price paid
+
+var underTen= 0;
+for (var i = 0; i < sales.length; i++) 
+{
+	if (sales[i] < 10)
+	{
+	underTen = underTen + 1
+	}
+}
+console.log("The number of people who paid less than $10.00 per is: " + underTen);   //paid < than $10
+
+
+var netProfit = reveNue - (10 * unitsSold); 
+console.log("If the widget cost $10 each to make , the profit made is: " + netProfit);    //cost $10
+	
+
+</script>
+</body>
+</html>
+
