@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <title>jQuery: The Day is Mine, Trebek</title>
+    <meta charset="utf-8">
+    <style>
+body { font-family: verdana, arial, helvetica, sans-serif; font-size: 13px; width: 600px; margin: auto; }
+ul { position: relative; }
+ul.testing { width: 400px; }
+ul.testing li { margin-bottom: .5em; clear: both;}
+.menu li { display: inline-block; padding: 4px 8px; background: black; color: white; border: 1px solid #CCC; }
+.passed, .failed { padding: 0 1em; float: right; color: white; }
+.passed { background: #272; } .failed { background: #722; }
+.saturday-night.fever { color: pink; }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="assignments">
+      <h2>Selecting Elements</h2>
+      <ul class="testing selections">
+        <li> All elements with a class of "external" <span data-test=external></span></li>
+        <li> All &lt;cite&gt; elements <span data-test=citations></span></li>
+        <li> The element with an ID of "special" <span data-test=special></span></li>
+        <li> &lt;li&gt; elements contained anywhere inside of the div with a class of "main" <span data-test=mainList></span></li>
+        <li> &lt;li&gt; elements that are direct children of the ul with a class of "menu" <span data-test=menuChildren></span></li>
+        <li> The closest div above the ul with a class of "menu" <span data-test=closest></span></li>
+        <li> The direct parent of the ul with a class of "menu" <span data-test=parent></span></li>
+      </ul>
+
+      <h2>Manipulating Elements</h2>
+      <ul class="testing manipulation">
+        <li> Add a class named "fever" to all elements with the class "saturday-night" <span data-test=disco></span></li>
+        <li> Change the HTML in the element with the ID of "cow" to read "moo" <span data-test=cowFlu></span></li>
+        <li> Turn all of the elements with a class of "cloud" to be white text on a blue background. <span data-test=clouds></span></li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <h1>Raccoons: The Silent Killers</h1>
+      <img src="http://farm7.staticflickr.com/6138/6018256738_ffbb43eb0a_z.jpg">
+
+      <nav>
+        <ul class="menu">
+          <li>Diet</li>
+          <li>Known Predators</li>
+          <li>Habitat</li>
+          <li>Criminal History</li>
+          <li>Classification</li>
+        </ul>
+      </nav>
+
+      <p>
+        The <span class="saturday-night">raccoon</span> is a <span class="cloud">small</span>, woodland-dwelling creature made entirely of cardboard. Raccoons are thought to be descended from the lemur (<i id="special">lemurus normalus</i>), although <span class="cloud">scientific opinion</span> is divided. Like many <span class="cloud">insects</span>, raccoons have six legs and eat mostly pollen. When disturbed, raccoons often emit a piercing <em id='cow'>squeal</em> to frighten off aggressors. There have been thirteen raccoons elected to the US Senate, according to <cite>National Journal</cite> and <cite>Small Mammal Daily</cite>.
+
+      <p>
+        More <span class="cloud">information</span> can be found at:
+
+        <ul>
+          <li><a href="http://lmgtfy.com/?q=raccoons" class="external">Wikipedia</a> and 
+          <li><a href="//localhost" class="external">a sixth-grader's last-minute book report</a>.
+        </ul>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script>
+var answers = {};
+/* WRITE YOUR QUERIES STARTING HERE */
+/* This is an example answer: */
+//answers.example = $('*');
+
+/* Find all elements with a class of "external" */
+answers.external = $('external').css;
+
+/* Find all <cite> elements */
+answers.citations = $();
+
+/* Find the element with an ID of "special" */
+answers.special = $();
+
+/* Find <li> elements contained anywhere inside of a div with a class of "main" */
+answers.mainList = $();
+
+/* Find <li> elements that are direct children of a <ul> with a class of "menu" */
+answers.menuChildren = $();
+
+/* Find the closest <div> above the <ul> with a class of "menu" */
+answers.closest = $();
+
+/* Find the direct parent of the <ul> with a class of "menu" */
+answers.parent = $();
+
+/* Add the class "fever" to all elements with the class "saturday-night" */
+answers.disco = $();
+
+/* Change the HTML in the element with an ID of "cow" to read "moo" */
+answers.cowFlu = $();
+
+/* Turn all of the elements with a class of "cloud" to white text on a blue background */
+answers.clouds = $();
+
+    </script>
+    <script>
+/**
+
+BELOW THIS IS ALL TESTING CODE. 
+
+You may find it interesting--apart from the functions inside testCollection,
+it uses only what we've learned in class.
+
+*/
+(function() {
+  
+  var testCollection = {
+    external: function(items) { return items.length == 2 && items.not('a').length == 0 },
+    citations: function(items) { return items.length == 2 && items.not('cite').length == 0 },
+    special: function(items) { return items.length == 1 && items.not('i').length == 0 },
+    mainList: function(items) { return items.length == 7 && items.not('li').length == 0 && items.selector.search(/main/) > -1 },
+    menuChildren: function(items) { return items.length == 5 && items.not('li').length == 0 && items.selector.search(/>/) > -1 },
+    closest: function(items) { return items.length == 1 && items.not('.main').length == 0 },
+    parent: function(items) { return items.length == 1 && items.not('nav').length == 0 },
+    disco: function(items) { return items.length == 1 && items.hasClass('fever') },
+    cowFlu: function(items) { return items.length == 1 && items.html().toLowerCase() == 'moo' },
+    clouds: function(items) { return items.length == 4 && items.css('background-color') !== 'white' && items.css('color') !== 'black' }
+  };
+
+  var testElements = document.querySelectorAll('[data-test]');
+  for (var i = 0; i < testElements.length; i++) {
+    var element = testElements[i];
+    var testID = element.getAttribute('data-test');
+    if (testCollection[testID]) {
+      var test = testCollection[testID];
+      var passed = false; 
+      if (answers[testID] && test(answers[testID])) {
+        passed = true;
+      }
+      var message = '<span class="failed">FAIL</span>';
+      if (passed) {
+        message = '<span class="passed">PASS</span>';
+      }
+      var method = passed ? 'info' : 'warn';
+      console[method]('Tested: ' + testID);
+      element.innerHTML = message;
+    }
+  }
+
+
+})();
+
+    </script>
+  </body>
+</html>
