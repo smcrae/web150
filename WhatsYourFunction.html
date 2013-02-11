@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+		<title>Function Stylings</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script>
+	
+var shelf = [ {title: "Holiday On Ice", author: "David Sedaris", checkedOut: true }, 	
+				  {title: "The Biology of Belief", author: "Bruce Lipton", checkedOut: true },
+              {title: "Hannibal", author: "Thomas Harris", checkedOut: false } , 
+              {title: "Devil's Play Things", author: "Matt Richtel", checkedOut: true }, 
+              {title: "Fight Club", author: "Chuck Palahniuk", checkedOut: true } ,
+              {title: "The Dreaming Universe", author: "Fred Allan Wolf", checkedOut: true }];
+
+var formatBook = function(book) {
+	var output = "This book's title is <strong>" + book.title + "</strong> and the author is " + book.author;
+	return output;
+}
+
+var loanToggle = function(book) {
+	if (book.checkedOut == true) 
+	{	 
+		book.checkedOut = false;	
+	}
+	else
+	{
+		book.checkedOut = true;
+	}
+}
+
+var listBook = function() {
+	for (var i =0; i < shelf.length; i++)
+	{
+		$('body').append(formatBook(shelf[i])+ "<br>");
+	 }
+}
+listBook();
+  </script>
+</body>
+</html>
