@@ -72,34 +72,34 @@ var answers = {};
 //answers.example = $('*');
 
 /* Find all elements with a class of "external" */
-answers.external = $('external').css;
+answers.external = $(".external");  
 
 /* Find all <cite> elements */
-answers.citations = $();
+answers.citations = $("cite");
 
 /* Find the element with an ID of "special" */
-answers.special = $();
+answers.special =  $("#special");
 
 /* Find <li> elements contained anywhere inside of a div with a class of "main" */
-answers.mainList = $();
+answers.mainList = $(".main li");
 
 /* Find <li> elements that are direct children of a <ul> with a class of "menu" */
-answers.menuChildren = $();
+answers.menuChildren = $("ul.menu > li");
 
 /* Find the closest <div> above the <ul> with a class of "menu" */
-answers.closest = $();
+answers.closest = $("ul.menu").closest("div");
 
 /* Find the direct parent of the <ul> with a class of "menu" */
-answers.parent = $();
+answers.parent = $("ul.menu").parent("");
 
 /* Add the class "fever" to all elements with the class "saturday-night" */
-answers.disco = $();
+answers.disco = $(".saturday-night").addClass("fever");
 
 /* Change the HTML in the element with an ID of "cow" to read "moo" */
-answers.cowFlu = $();
+answers.cowFlu = $("#cow").text("moo");
 
 /* Turn all of the elements with a class of "cloud" to white text on a blue background */
-answers.clouds = $();
+answers.clouds = $(".cloud").css({"background-color" : "blue", "color" : "white"});
 
     </script>
     <script>
