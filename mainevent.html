@@ -1,54 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta char"UTF-8"/>
+<meta charset="UTF-8"/>
 <title>Main Event Test</title>
 <style>
-@charset "UTF-8";
-/* CSS Document */
-#navcontainer { width: 200px; }
 
-#navcontainer ul
+.menu li
 {
-margin-left: 0;
-padding-left: 0;
-list-style-type: none;
-font-family:"Palatino Linotype", "Book Antiqua",;
+    display:inline-block;
+   padding: 20px;
+   list-style-type: none;
+   border: 1px solid black;   
+   margin:5px;
 }
 
-#navcontainer a
-{
-display: block;
-padding: 3px;
-width: 160px;
-height: 160px;
-background-color: #036;
-border-bottom: 1px solid #eee;
+.panel{
+   display: block;
+   padding: 5px;
+   width: 75%;
+   background-color: #036;
+   border-bottom: 1px solid #eee;
+   position:relative;
+   color:white;
 }
 
-#navcontainer a:link, #navlist a:visited
+a:hover
 {
-color: #EEE;
-text-decoration: none;
+   background-color: #036;
+   color: #fff;
 }
 
-#navcontainer a:hover
-{
-background-color: #369;
-color: #fff;
+.selected {
+	border: 2px solid #036;
+  	background-color: #036;
 }
+
+.panel img{
+ 	width:100%; 
+}
+
 </style>
 </head>
 
 <body>
 <p>Bellingham, perhaps NOT the place to be</p>
-<div id="navcontainer">
-<ul id="navlist">
-<li><a href="..//web120/pna/images/buildingg.jpg" rel"lightbox2.html">Slide One</a></li> 
-<li><a href="..//web120/pna/images/funnymurall.jpg">Slide Two</a></li>
-<li><a href="..//web120/pna/images/rustybikee.jpg">Slide Three</a></li>
-<li><a href="..//web120/pna/images/grungemurall.jpg#">Slide Four</a></li>
-</ul>
+
+<ul class="menu">
+	<li><a href="#SlideOne"><img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/funnymural_sm.jpg"></a></li> 
+   <li><a href="#SlideTwo"><img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/building_sm.jpg"></a></li>
+   <li><a href="#SlideThree"><img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/rustybike_sm.jpg"></a></li>
+   <li><a href="#SlideFour"><img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/grungemural_sm.jpg"></a></li>
+</ul>  
+
+
+<div class="panel" id="SlideOne">Is this really the city nickname?
+<img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/funnymurall.jpg">
 </div>
+
+<div class="panel" id="SlideTwo">Isn't this where Norman Bates lived?
+<img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/buildingg.jpg">
+</div>
+
+<div class="panel" id="SlideThree">Our bike rental quality was fair at best
+<img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/rustybikee.jpg">
+</div>	
+
+<div class="panel" id="SlideFour">Small Town Seeedie Laundry
+<img src="http://edison.seattlecentral.edu/~smcrae01/web150/images/grungemurall.jpg">
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+var onClick = function(e){
+	e.preventDefault();
+	var $this = $(this);
+	$('.selected').removeClass('selected');
+	$this.closest('li').addClass('selected');
+	var target = $this.attr('href');
+	$('.panel').hide();
+	var panel = $(target);
+	
+	panel.css({ 
+		left:'20px',
+		opacity:0,
+		top: '250px'
+	}).show()
+	
+	panel.animate({
+		top:0,
+		opacity: .1,
+	}).animate({
+			left:40,
+			opacity:1
+	});
+
+}
+	
+$('.menu a').on('click', onClick);
+$('.menu a:first').trigger('click');
+			
+</script>
 </body>
 </html>
+
