@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Form U Laic Assignment</title>
@@ -26,6 +25,14 @@
 
     div {font-family:'quicksand_boldregular';}
 
+.required{color:#F00; font-weight:400;
+   }
+  
+#success {
+   color:#F00; font-weight:400;
+   
+   }   
+   
 .footer {font-family:'quicksand_boldregular';}
 
   a:link {color:#ff6633;font-weight:300;}    /* unvisited link */
@@ -41,31 +48,31 @@
 
  
 <h2> Sherrie's Formhandler Assignment</h2>
-<form action="http://www.newmanic.com/formhandler3.asp" method="post">
+<form>
   <table border="1">
+  <tr>
+      <td colspan="2" class="required">* Fields are REQUIRED</td>
+          </tr>
     <tr>
-      <td>Enter Full Name to Win Cool Prizes</td>
-      <td><input type="text" name="FromName" maxlength="100" /></td>
+      <td>Enter Full Name to Win Cool Prizes<span class="required"> *</span></td>
+      <td><input type="text" name="FromName" id="FromName" maxlength="100" pattern="[a-zA-Z ]+" required /></td>
     </tr>
     <tr>
-      <td>Email Address</td>
-      <td><input type="email" name="FromEmail" maxlength="100" /></td>
+      <td>Email Address<span class="required"> *</span></td>
+      <td><input type="email" id="FromEmail" name="FromEmail" maxlength="100" pattern="[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\.[a-zA-Z]{2,4}" required /></td>
     </tr>
     <tr>
       <td colspan="2"><textarea rows="5" cols="25" name="comments">Any comments Type here !</textarea></td>
     </tr>
     <tr>
     <td colspan="2">
-      <input type="submit" value="Send Me!" />
+      <input type="submit" id="submitForm" value="Enter to WIN!"/>
     </td>
+    
       </tr>
-    </table>
+      
+   </table>
         
-    <input type="hidden" name="ToEmail" value="sherrie_mcrae@yahoo.com" />
-    <input type="hidden" name="ToFirst" value="Sherrie" />
-    <input type="hidden" name="ToLast"  value="McRae" />
-    <input type="hidden" name="Subject" value="Web120 Contact Form"/>
-    <input type="hidden" name="Thanks"  value="http://edison.seattlecentral.edu/~smcrae01/web150/FormhandlingThanks.html"/>
     </form>
 
     <p class="footer">
@@ -75,7 +82,33 @@
       <a href="http://jigsaw.w3.org/css-validator/check?uri=referer" target="blank">Valid CSS</a>
     </p>
     
-    
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+$('#submitForm').on('click', function() {
+	// check required elements #FromName & #FromEmail
+	var isValid = false
+	var requiredFields = $('[required]');
+	for (var i = 0; i < requiredFields.length; i++) {
+		var currentElement = requiredFields.eq(i);
+		var currentPattern = RegExp('^' + currentElement.attr('pattern') + '$');
+		var currentValue = currentElement.val();
+		var isMatch = currentPattern.test(currentValue);
+		if (!isMatch) {
+			isValid = false;
+			return;
+		}
+		else{
+			isValid = true;
+		}
+	}
+	
+	if (isValid)
+	{
+		$('#submitForm').click();	
 
+  }
+});
+
+</script>    
 </body>
 </html>
