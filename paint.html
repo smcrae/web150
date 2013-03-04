@@ -154,12 +154,12 @@ $(uiCanvas).on('mouseup mousedown', function(e) {
 		} else {
 			// draw the line
 			uiContext.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
-			Context.beginPath();
-			Context.lineWidth = brush.size * 2;
-			Context.moveTo(brush.downAt.x, brush.downAt.y);
-			Context.lineTo(x, y);
-			Context.strokeStyle=brush.color;
-			Context.stroke();
+			context.beginPath();
+			context.lineWidth = brush.size * 2;
+			context.moveTo(brush.downAt.x, brush.downAt.y);
+			context.lineTo(x, y);
+			context.strokeStyle=brush.color;
+			context.stroke();
 		
 		}
 	}
@@ -179,15 +179,15 @@ $(uiCanvas).on('mousemove', function(e) {
 	switch (brush.mode) {
 		//draw a circle at the current mouse location
 		case "draw":
-			Context.beginPath();
-			Context.arc(x, y, brush.size, 0, 2 * Math.PI);
-			Context.fillStyle=brush.color;
-			Context.fill();
+			context.beginPath();
+			context.arc(x, y, brush.size, 0, 2 * Math.PI);
+			context.fillStyle=brush.color;
+			context.fill();
 			break;
 
 		//erase a block at the current mouse location
 		case "erase":
-			Context.clearRect(
+			context.clearRect(
 				x - brush.size, 
 				y - brush.size, 
 				brush.size * 2, 
