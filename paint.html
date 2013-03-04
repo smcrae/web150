@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+    <title>Paint By Numbers</title>
+	  <meta charset="utf-8">
+	  <style>
+		    body{background-color:#1B918A;}
+		    
+		    h1{font-family: sans-serif;
+		         color: #333399;}
+		    
+		    button { width: 100%; }
+		    .selected { background: #CCF; }
+		    #ui { position: absolute; }
+		    
+		    ul {	
+				list-style-type:none;
+				float: left;
+				margin: 0px;
+				padding: 10px;
+				display: inline-block;
+		    }
+		    
+		    .palette {
+				background-color:#888;
+				padding: 0px;
+				margin: 0px;
+		    }
+		    .palette ul {margin: 0px;padding: 0}
+		    
+		    ul li {
+				/*display: inline;*/
+				margin: 0px;
+				padding: 0px; }
+		    
+		    .palette ul li {
+				margin: 10px;
+				padding: 10px;
+				width: 20px;
+				height:15px;
+		    }
+		   ul.palette li {margin: 0;display: inline; width: 20px;height:15px;float: left} 
+		    .color{}
+		    .color{}
+	  </style>
+</head>
+
+<body>
+	  <h1>Paint By Numbers</h1>
+
+	  <div style="float: left;">
+		    <canvas width=640 height=480 id="ui"></canvas>
+		    <canvas width=640 height=480 id="canvas" style="border: 3px solid #888"></canvas>
+	  </div>
+	  
+	  <div style="float: left; width: 100px; padding-left: 10px;">
+		    <button class="mode selected" value="draw">Draw</button>
+		    <button class="mode" value="erase">Erase</button>
+		    <button class="mode" value="line">Line</button>
+		    <hr>
+		    <button class="size" value="1">Small</button>
+		    <button class="size selected" value="5">Medium</button>
+		    <button class="size" value="20">Large</button>
+		    <hr>
+		    <div style="width: 100%;">
+				<ul class="palette">
+					  <li class="color" style="background-color: #000000" value="#000000"></li>
+					  <li class="color" style="background-color: #297f81" value="#297f81"></li>
+					  <li class="color" style="background-color: #E56142" value="#E56142"></li>
+					  <li class="color" style="background-color: #F07356" value="#F07356"></li>
+					  <li class="color" style="background-color: #f38870" value="#f38870"></li>
+					
+				</ul>
+				<ul class="palette">
+					   <li class="color" style="background-color: #993399" value="#993399"></li>
+					  <li class="color" style="background-color: #333399" value="#333399"></li>
+					  <li class="color" style="background-color: #ffff00" value="#ffff00"></li>
+					  <li class="color" style="background-color: #ff9900" value="#ff9900"></li>
+					  <li class="color" style="background-color: #F2E0D1" value="#F2E0D1"></li>
+				</ul>
+			</div>
+		    <div style="margin-top: 10px;font-family: sans-serif;font-size: small;float: left;">selected brush</div>
+		    <div id="brushColor" style="width: 50%;float:left;background-color: black; height: 15px;"></div>
+	  </div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+//canvas/context is our drawing surface
+var canvas = document.querySelector('#canvas');
+var context = canvas.getContext('2d');
+//uiCanvas/uiContext is used for the overlays, like line previews
+var uiCanvas = document.querySelector('#ui');
+var uiContext = uiCanvas.getContext('2d');
+
+//the brush object stores various information about our paint application
+var brush = {
+	color: "black",
+	size: 5,
+	buttonDown: false,
+	mode: "draw",
+	downAt: {
+		x: 0,
+		y: 0
+	}
+};
+
+//change the color of the brush
+$('.color').on('click', function() {
+	  //get the value of the selected colored div	  
+	  newColor= $(this).attr("value");
+	  $("#brushColor").css("background-color",newColor);
+	  brush.color = newColor;
+});
+
+//change modes when clicking any of the mode buttons
+$('.mode').on('click', function() {
+	//set the current item as "selected"
+	$('.mode.selected').removeClass('selected');
+	$(this).addClass('selected');
+	//get the mode and store it on the brush
+	var mode = $(this).val();
+	brush.mode = mode;
+});
+
+//change sizes when clicking size buttons
+$('.size').on('click', function() {
+	//set the current item as "selected"
+	$('.size.selected').removeClass('selected');
+	$(this).addClass('selected');
+	//get the size from the button and store it on the brush
+	var size = parseInt( $(this).val(), 10 );
+	brush.size = size;
+});
+
+$(uiCanvas).on('mouseup mousedown', function(e) {
+	/*if (e.type == 'mousedown') {
+		brush.buttonDown = true;
+	} else {
+		brush.buttonDown = false;
+	}*/
+	brush.buttonDown = e.type == 'mousedown';
+
+	//line mode requires some extra treatment
+	if (brush.mode == "line") {
+		//convert page coordinates to canvas coordinates
+		var offset = $(this).offset();
+		var x = e.pageX - offset.left;
+		var y = e.pageY - offset.top;
+		//is this mousedown or mouseup?
+		if (brush.buttonDown) {
+			// set the starting point
+			brush.downAt.x = x;
+			brush.downAt.y = y;
+		} else {
+			// draw the line
+			uiContext.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
+			Context.beginPath();
+			Context.lineWidth = brush.size * 2;
+			Context.moveTo(brush.downAt.x, brush.downAt.y);
+			Context.lineTo(x, y);
+			Context.strokeStyle=brush.color;
+			Context.stroke();
+		
+		}
+	}
+});
+
+//most drawing takes place during mousemove
+$(uiCanvas).on('mousemove', function(e) {
+	//if the mouse button isn't pressed, bail out
+	if (brush.buttonDown == false) {
+		return;
+	}
+	//convert page coordinates to canvas coordinates
+	var offset = $(this).offset();
+	var x = e.pageX - offset.left;
+	var y = e.pageY - offset.top;
+	//depending on the mode, we change the canvas in several ways
+	switch (brush.mode) {
+		//draw a circle at the current mouse location
+		case "draw":
+			Context.beginPath();
+			Context.arc(x, y, brush.size, 0, 2 * Math.PI);
+			Context.fillStyle=brush.color;
+			Context.fill();
+			break;
+
+		//erase a block at the current mouse location
+		case "erase":
+			Context.clearRect(
+				x - brush.size, 
+				y - brush.size, 
+				brush.size * 2, 
+				brush.size * 2);
+			break;
+
+		//draw a preview "line" while dragging between endpoints
+		case "line":
+			uiContext.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
+			uiContext.beginPath();
+			uiContext.moveTo(brush.downAt.x, brush.downAt.y);
+			uiContext.lineTo(x, y);
+			uiContext.stroke();
+			break;
+	}
+});
+
+</script>
+</body>
+</html>
