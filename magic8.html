@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+      <title>Magic8Ball</title>
+      <meta charset="utf-8">
+      <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+</head>
+  
+<style>
+ 
+#answer{font-size:xx-large; 
+            width:1050px; 
+            height:1050px;
+            color: white;
+          }
+
+body{background-color: black; text-align: center;}
+</style>
+
+<body>
+            <input id="question"><button id="go">Tell Me 8 Ball</button>
+            <div id="answer">Type in a Yes or No Question</div>
+            <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+            <script>
+            
+            $("#go").click(function() {
+                 var request = $.ajax({
+                        url: "http://thomaswilburn.net/sccc/api/magic8.php",
+                        cache: false,
+                        dataType: 'json'
+                        }).done(function( data ) {
+                        $("#answer").html(data.result);
+                  });
+            });
+            
+            </script>
+</body>
+</html>
+<!--try as i might i was unable to converge my two ideas into one working file. 
+It had SUCH potential to be one wonderful black screen w/ white triangle.
+<head>
+
+<style type="text/css">
+  div { background: black; position: relative; }
+
+.arrow-up {
+    width  : 0;
+    height : 0;
+    border-left   : 50px solid transparent;
+    border-right  : 50px solid transparent;
+    border-bottom : 50px solid black;
+}
+
+#container {
+    position : relative;
+    top: 250px;
+    left: 750px;
+}
+
+      .top {
+    position: absolute;
+    top: 6px;
+    left : 10px;
+    width : 0;
+    height : 0;
+    z-index: 100;
+
+    border-left   : 50px solid transparent;
+    border-right  : 50px solid transparent;
+    border-bottom : 50px solid white;
+}
+.bottom {
+      position : absolute;
+      width    : 0;
+      height   : 0;
+      z-index  : 99;
+      border-left   : 60px solid transparent;
+      border-right  : 60px solid transparent;
+      border-bottom : 60px solid transparent;
+}
+
+</style>
+
+<script>
+  $(document).ready(function() {
+    
+$("div").click(function () {
+      $(this).effect("shake", { times:3 }, 100);
+});
+
+  });
+</script>
+
+</head>
+<body style="font-size:62.5%;">
+  <p></p><p></p><p></p><p></p><div></div>
+
+
+<div id="container">
+    <div class="top"></div>
+    <p>test test</p>
+    <div class="bottom"></div>
+</div>
+
+</body>
+</html>
+*/-->
