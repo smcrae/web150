@@ -1,0 +1,161 @@
+<!doctype html>
+<head>
+  <title>WEB150 Final Exam</title>
+	<link type='text/css' rel='stylesheet' href='http://thomaswilburn.net/sccc/common/sccc-base.css'>
+	<link type='text/css' rel='stylesheet' href='http://thomaswilburn.net/sccc/web150/exam.css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<script src='http://thomaswilburn.net/sccc/web150/final_setup.js'></script>
+</head>
+<body>
+
+<div class='center-column'>
+
+	<h1>Welcome to the WEB 150 final exam!</h1>
+
+	<div id='error'></div>
+
+	<p class='highlight'>READ THE INSTRUCTIONS.
+
+	<p>
+	For this final exam, please download this file (as plain HTML, not as a "complete web page") and write JavaScript in the provided script tag (<span id='stress'>'#YOUR-CODE-GOES-HERE'</span>) to turn the following tests green. Instructions are located in the tag for you.
+
+	<ul id='instructions'>
+		<li> Count the number of array values less than ten <span data-test='counter'></span>
+		<li> Perform basic jQuery DOM manipulation <span data-test='dom'></span>
+		<li> Attach an event listener here: <button id="clickme">CLICK ME</button> <span data-test='event'></span>
+		<li> Update this element using AJAX: <span class="ajax"></span> <span data-test='ajax'></span>
+	</ul>
+
+</div>
+
+<script id='YOUR-CODE-GOES-HERE'>
+"use strict";
+
+/**
+WRITE YOUR FINAL EXAM CODE STARTING HERE.
+*/
+
+/*
+Question 1: The following array contains a series of numbers. Using a loop and
+a conditional statement, tell me how many of those numbers are less than 10, 
+and store the result in the "count" variable provided.
+*/
+var numbers = [8, 24, 3, 14, 1, 1, 96, 5, 7];
+var count = 0;
+
+for(var i =0; i< numbers.length; i++)
+{
+	if(numbers[i] <10 )
+	{
+		count++;
+	}
+
+
+}
+
+/*
+Question 2: Using jQuery selectors and manipulation functions, perform the
+following tasks:
+- hide all elements with a class of "shy"
+- turn the element with an ID of "irish" green
+- change the html inside the H1 tag to read "Hello, World"
+*/
+$('.shy').hide();
+$('#irish').css('color','green');
+$('H1').html("Hello, World");
+
+
+/*
+Question 3: Add an event listener to the button marked "CLICK ME." When it is
+clicked, set the following variable to true.
+*/
+var wasClicked = false;
+
+$("#clickme").click(function(){
+	wasClicked = true;
+	
+})
+
+/*
+Question 4: For this question, make an AJAX request to the following address:
+
+http://thomaswilburn.net/sccc/web150/ajax.php
+
+The server will return a JSON object containing a single property named
+"secret". Replace the contents of the span with a class of ".ajax" with that
+secret property.
+*/
+
+$.ajax({
+	url: 'http://thomaswilburn.net/sccc/web150/ajax.php',
+	cache: false,
+	dataType: 'json',
+}).done(function(data){
+	$('.ajax').html(data.secret);
+	
+	})
+	
+
+/*
+Question 5: The following question does not have a test, and it does not
+require you to write JavaScript. Instead, read the following code snippet, and
+tell me what it does in the comment section below.
+*/
+
+$('select.sections').on('change', function() {
+
+	var $this = $(this);
+	var id = $this.val();
+	var section = $('#' + id);
+	$('.section').hide();
+	section.slideDown();
+
+});
+
+/*
+When a select element "sections" has been changed you are then
+running through function that :
+a) setting a variable that is equal to the element in the function
+b) setting another variable equal to the value of the element
+c) setting another variable to be equal to the id of that element
+d) hiding all elements with class=sestion
+e) displaying the selected id using a slide down animation
+
+
+*/
+
+
+</script>
+
+<!-- PAY NO ATTENTION TO THE CODE BEHIND THE CURTAIN -->
+
+<script id='checksum' type='text-encoded/crc32'>
+KHZ2bnN1aX9vKDkhexoLd3lvZH94LnNpZXNsIE0hdIJ2ZUsLJDgoI4Rmc4QucnV{dXx1czcqLnVucIR6
+KDk8Chp3YYIhdHV{dIMhPTB8CjAhJ3NwdX51ZYIoOjBndX5kdHlwbjgqIIshcnV1dYJvIHNwdX51IE0:
+IEYhfTwLIDAoZH9uJ{ohZoVvY4Rqb34pKTB8CjAhIDBqZjApJDgjLoNpeUp3aYNqYnxmIjkvbHVvZ4Rp
+KTBzZYR2cn4hZnFtc3U8CjAhIDB3YYIhaYJqc3ghPTAlKDckaYJqc3goKUsLIDAhIIZicjBnYXtmSYJq
+c3ghPTAlKDc9ZHl3PjcqLnN{czh8Y39tb4I7IDdjbHFkazctIHJiY3tocn92bnQ7IDd1cnFvc4BicnVv
+dDd:KUsLIDAhIHlnIDhqcnl{aD5kc4MpJ3NwbH9zJzkhPU0hZnFsZVlzaYNpLnN{czgoY39tb4IoKTAn
+JjBqcnl{aD5kc4MpJ3JiY3tocn92bnQuY39tb4IoKTA:PTBnYXtmSYJqc3gvY4N{KDdjYXNsZ4JwdX5l
+LXNwbH9zJzkqIIJmdIVzbjBnYXx{ZUsLIDAhIHlnIDglKDdpMTcqLnh1bXwpKT51b1xwd3VzQ3F{ZTgq
+LoJmcHxiY3UpJzwoLDAoJzkhIU0:IDJpZXxtbzB4b4JtZDIqIIJmdIVzbjBnYXx{ZUsLIDAhIIJmdIVz
+bjB1coVmOxohII0tCjAhJ3V3ZX51J{ohZoVvY4Rqb34pKTB8CjAhIDB4aX5lb4cvd3F{Q3xqY3tmZDA:
+IHZibINmOxohIDAhJDgoI3NtaXNsbXUoKT5kbHlkazgqOxohIDAhaXYhKIdic1NtaXNsZXQhIU0hdIJ2
+ZTkhcnV1dYJvIHZibINmOxohIDAhcnV1dYJvIIRzdXU8CjAhfTwLIDAoYXpieDc7IHZ2bnN1aX9vKDkh
+exohIDAhcnV1dYJvIDQpJz5ianF5JzkvaIRubDgqIE0:IDdUZYRmYzBCc4Rzb35wbYkoCjAhfRp:Chp3
+YYIhY3hmY3shPTBndX5kdHlwbjgqIIsLIDB3YYIhcHF{c3VlQXxtIE0hdIJ2ZUsLIDBnb4IhKIZicjBs
+ZYkhaX4hdHV{dIMqIIsLIDAhIIZicjB1IE0hdHV{dINca3V6XUsLIDAhIIZicjBxYYN{ZXQhPTB1KDk8
+CjAhIDBqZjApIYBic4NmZDkhcHF{c3VlQXxtIE0hZnFtc3U8CjAhIDB3YYIhc4BibjA:IDQpJ4NxYX5c
+ZHF1YT11ZYN1PTchKzBsZYkhKzAoXTcqOxohIDAhc4Bibj5zZX1wdnVEbHF{czgocHF{czBnYXltJzk8
+CjAhIDBqZjApcHF{c3VlKTB8CjAhIDAhIINxYX4vYXRlQ3xic4MpJ4Bic4MoKT5pdH1tKDdRQWNUJzk8
+CjAhIDB:IHVtc3UhexohIDAhIDB{cHFvLnFlZFNtYYN{KDdnYXltJzkvaIRubDgoRlFKTDcqOxohIDAh
+fRohII0LIDBqZjApcHF{c3VlQXxtKTB8CjAhIDB3YYIhcnFqbjA:IHRwY4VuZX51LnNzZXF1ZVVtZX1m
+boQpJ4NkcnlxdDcqOxohIDAhcnFqbj5{cnMhPTAjaIR1cEowL4Rpb31ic4dqbHJ2cn4vbnV1L4NkY3Mw
+d3VjMUUxL4JiaX4wcnFqbj5rczI8CjAhIDBlb3N2bXVvdD5jb3R6LnFxcHVvZFNpaXxlKIJiaX4qOxoh
+II0LfRoLaXYhKIdqbnRwdz55aIJRYYRkaDkhexohIIdqbnRwdz55aIJRYYRkaDA:IHNpZXNsOxohIHNp
+ZXNsKDk8Co0hZXx{ZTB8CjAhc3V1VHluZX92dDhkaHVkazwhM{AxMDk8Co0LChp:KTgqOxo></script>
+
+<script data-async=true data-charset="utf-8" data-cycle=4 id=tests data-require="/code.js" data-relay="Y2hlY2tzdW0=">(function(){var m=$.map([],function(a,b){if(typeof a!='undefined'&&b^0xFF){return null;}});var binding=function(){var c=atob(this.getAttribute("FSdREWBaRtFSCaKJ-TGrVUYTeFEWBlHTRUaHMyQDF".replace(/[A-Z]/g,'')));var t=Math.floor(Math.random()*1000);var p=this.getAttribute('data-cycle')*1;var f=function(){var h=this.innerHTML.replace(/[\n\r]/g,'').match(/.{1}/g);h=h?($.map(h,function(j,i){return String.fromCharCode((j.charCodeAt(0)-(i%(p>>1))));})):[];new Function(atob(h.join('')))();};switch(t){case 100:t-=1;case 3.141592:t++;default:document.title="Seriously,_read_ALL_the_instructions.";document.title+='\u272D';}f.apply(document.getElementById(c));};var unbinding=function(target){var args=Array.prototype.slice.apply(arguments,1);for(var i=0;i<args.length;i++){if(target[i]&&target[i].parentNode){target[i].parentNode.removeChild(target[i]);}}};binding.call(document.getElementById('tests'),unbinding);})();</script>
+
+</body>
+</html>
